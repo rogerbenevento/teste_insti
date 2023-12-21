@@ -1,0 +1,21 @@
+<form [formGroup]="formDespesa" (ngSubmit)="onSubmit()">
+  <div>
+    <div>
+      <po-input name="input" p-label="Código da despesa" formControlName="desc_desp"> </po-input>
+    </div>
+    <div>
+      <po-input name="input" p-label="Descrição" formControlName="desc_desp"> </po-input>
+    </div>
+    <div>
+      <po-input name="input" p-label="Unidade"> </po-input>
+    </div>
+    <div>
+      <po-input name="input" p-label="Valor unitário"> </po-input>
+    </div>
+    <div>
+      <po-input name="input" p-label="Tipo de despesa"> </po-input>
+    </div>
+
+    <button type="submit" [disabled]="!formDespesa.valid">Gravar</button>
+  </div>
+</form>
