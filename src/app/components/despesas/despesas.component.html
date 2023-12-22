@@ -1,49 +1,55 @@
 
+<div class="po-page-dynamic-table">
+    <po-page-dynamic-table
+      style="padding: 0 !important; margin: 0 !important; display: flex !important; justify-content: start !important;"
+      [p-actions]="actions"
+      [p-actions-right]="true"
+      [p-service-api]="serviceApi"
+    >
+    </po-page-dynamic-table>
+  
+  
+  <!-- <po-table
+    class="mt-4"
+    [p-columns]="columns"
+    [p-sort]="true"
+    [p-hide-table-search]="true"
+    [p-auto-collapse]="true"
+    [p-items]="items"
+  >
+    <ng-template p-table-column-template [p-property]="'tp_desp'" let-value>
+      <span>{{ value == '1' ? 'Valor unitário' : 'Valor total' }}</span>
+    </ng-template>
+  
+    <ng-template p-table-column-template [p-property]="'valor_unit'" let-value>
+      <span>{{ value.toString().replace(',', '').replace('.', ',') }}</span>
+    </ng-template>
+  
+    <ng-template p-table-column-template [p-property]="'cod_desp'" let-value>
+      <po-button
+        p-icon="po-icon-edit"
+        p-type="primary"
+        p-small="true"
+        (p-click)="editDespesa(value)"
+      ></po-button>&nbsp;
+      <po-button
+        p-icon="po-icon-delete"
+        p-type="danger"
+        p-small="true"
+        p-danger="true"
+        (p-click)="deleteDespesa(value)"
+      ></po-button>
+    </ng-template>
+  </po-table> -->
+</div>
+
 <po-divider></po-divider>
 <po-button
   p-label="Adicionar"
   p-icon="po-icon-plus"
   routerLink="/despesas/nova"
-></po-button>
-<!-- (p-click)="addDespesa()" -->
-
-<po-table
-  class="mt-4"
-  [p-columns]="columns"
-  [p-sort]="true"
-  [p-hide-table-search]="true"
-  [p-auto-collapse]="true"
-  [p-items]="items"
 >
   <ng-template p-table-column-template [p-property]="'tp_desp'" let-value>
     <span>{{ value == '1' ? 'Valor unitário' : 'Valor total' }}</span>
   </ng-template>
-</po-table>
-
-<!-- <po-modal p-title="Nova despesa" [p-primary-action]="confirm">
-  <form #optionsForm="ngForm">
-    <div>
-      <div>
-        <po-input name="input" p-label="Código da despesa"> </po-input>
-      </div>
-      <div>
-        <po-input name="input" p-label="Descrição"> </po-input>
-      </div>
-      <div>
-        <po-input name="input" p-label="Unidade"> </po-input>
-      </div>
-      <div>
-        <po-input name="input" p-label="Valor unitário"> </po-input>
-      </div>
-      <div>
-        <po-input name="input" p-label="Tipo de despesa"> </po-input>
-      </div>
-    </div>
-
-    <po-modal-footer [p-disabled-align]="false">
-      <po-button p-danger="true" p-label="Close" (p-click)="closeModal()"> </po-button>
-      <po-button p-label="Clear" (p-click)="restore()"> </po-button>
-      <po-button p-kind="primary" p-label="Confirm" (p-click)="confirmDespesa()"> </po-button>
-    </po-modal-footer>
-  </form>
-</po-modal> -->
+</po-button>

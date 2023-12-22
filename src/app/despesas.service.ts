@@ -19,15 +19,19 @@ export class DespesasService {
     return this.http.get(`${this.domain}${this.endpoint}`);
   }
 
+  getDespesa(id: string): Observable<any> {
+    return this.http.get(`${this.domain}${this.endpoint}/bycod/${id}`);
+  }
+
   postData(data: any): Observable<any> {
     return this.http.post(`${this.domain}${this.endpoint}`, data);
   }
 
-  putData(data: any): Observable<any> {
-    return this.http.put(`${this.domain}${this.endpoint}`, data);
+  putData(id: string, data: any): Observable<any> {
+    return this.http.put(`${this.domain}${this.endpoint}/${id}`, data);
   }
 
-  deleteData(id: number): Observable<any> {
+  deleteData(id: string): Observable<any> {
     return this.http.delete(`${this.domain}${this.endpoint}/${id}`);
   }
 }

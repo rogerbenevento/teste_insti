@@ -1,30 +1,42 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PoDynamicFormField } from '@po-ui/ng-components';
+import { DespesasService } from 'src/app/despesas.service';
+import { despesaFields } from 'src/app/utils/despesaFields';
 @Component({
   selector: 'app-despesa-form',
   templateUrl: './despesa-form.component.html',
   styleUrls: ['./despesa-form.component.css']
 })
 export class DespesaFormComponent {
+  isHideLoading: boolean = true;
+  formDespesa = {};
 
-  formDespesa: FormGroup;
+  fields: Array<PoDynamicFormField> = despesaFields;
 
   constructor(
-    private formBuilder: FormBuilder
+    private despesasService: DespesasService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.formDespesa = this.formBuilder.group({
-      cod_desp: new FormControl('', [Validators.required]),
-      desc_desp: new FormControl('', [Validators.required]),
-      valor_unit: new FormControl('', [Validators.required]),
-      tp_desp: new FormControl('', [Validators.required]),
-    });
+    
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.formDespesa.value);
+    this.isHideLoading = false;
+
+    console.log('formDespesa', this.formDespesa);
+
+    const cod_desp = Math.floor(Math.random() * 100000) + 1;
+    const payload = {...this.formDespesa, cod_desp: cod_desp};
+    
+    this.despesasService.postData(payload).subscribe((data: any) => {
+      console.log(data);
+      this.isHideLoading = true;
+
+      this.router.navigate(['/despesas']);
+    });
   }
 
 }

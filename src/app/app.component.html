@@ -1,9 +1,13 @@
 <div class="po-wrapper">
-  <po-toolbar p-title="Insti APP"></po-toolbar>
+  <po-toolbar 
+    p-title="Insti APP"
+  ></po-toolbar>
 
-  <po-menu [p-menus]="menus"></po-menu>
+  <po-menu [p-menus]="menus" [p-collapsed]="true"></po-menu>
 
-  <po-page-default p-title="Despesas">
-    <router-outlet></router-outlet>
+  <po-page-default>
+    <div style="width: 100%; padding: 0; margin: 0; border: 1px solid red">
+      <router-outlet></router-outlet>
+    </div>
   </po-page-default>
 </div>

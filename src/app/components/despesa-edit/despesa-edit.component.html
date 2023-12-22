@@ -1,0 +1,32 @@
+<po-divider></po-divider>
+<po-loading-overlay
+  [p-screen-lock]="true"
+  p-size="string"
+  p-text="Persistindo os dados"
+  [hidden]="isHideLoading"
+>
+</po-loading-overlay>
+
+<div *ngIf="despesa && fields">
+  <po-dynamic-form
+    #dynamicForm
+    p-auto-focus="desc_desp"
+    [p-fields]="fields"
+    [p-value]="formDespesa"
+  ></po-dynamic-form>
+
+  <po-divider></po-divider>
+
+  <po-button
+    p-label="Gravar"
+    [p-disabled]="!dynamicForm.form.valid"
+    (p-click)="onSubmit()"
+  ></po-button>
+  &nbsp;
+  <po-button
+    p-label="Cancelar"
+    p-type="danger"
+    p-danger="true"
+    routerLink="/despesas"
+  ></po-button>
+</div>

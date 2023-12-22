@@ -1,7 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { PoModalComponent, PoTableColumn, PoModalAction } from '@po-ui/ng-components';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PoTableColumn } from '@po-ui/ng-components';
+import { PoPageDynamicTableActions } from '@po-ui/ng-templates';
 import { DespesasService } from 'src/app/despesas.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-despesas',
@@ -10,49 +12,58 @@ import { DespesasService } from 'src/app/despesas.service';
 })
 export class DespesasComponent {
 
-  @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
-  @ViewChild('optionsForm', { static: true }) form: NgForm;
+  readonly serviceApi = environment.domain + '/despesapadrao';
 
-  columns: Array<PoTableColumn> = [
-    { property: 'id', label: 'Código' }, 
-    { property: 'desc_desp', label: 'Descrição' }, 
-    { property: 'valor_unit', label: 'Valor Unitário' },
-    { property: 'tp_desp', label: 'Tipo de Despesa', type: 'columnTemplate' },
-  ];
+  actionsRight = true;
 
-  items: Array<any> = [];
-
-  confirm: PoModalAction = {
-    action: () => {
-      alert('Confirmado')
+  readonly actions: PoPageDynamicTableActions = {
+    new: () => {
+      this.router.navigate(['/despesas/nova']);
     },
-    label: 'Confirm'
+    edit: ((id: string, resource: any) => {
+      this.editDespesa(resource.cod_desp);
+      console.log('edit ID: ', id);
+      console.log('edit resource: ', resource);
+      return resource.cod_desp;
+    }),
+    remove: ((id: string, resource: any) => {
+      console.log('remove: ', id, resource);
+      this.deleteDespesa(resource.cod_desp);
+      return true
+    }),
   };
 
-  constructor(private despesasService: DespesasService) { }
+  readonly fields = [
+    { property: 'cod_desp', label: 'Código', filter: true, maxLength: 50 },
+    { property: 'desc_desp', label: 'Descrição', filter: true, maxLength: 50 },
+    { property: 'Unidade', label: 'Unidade', filter: true, maxLength: 50 },
+    { property: 'tp_desp', label: 'Tipo de Despesa', filter: true, maxLength: 50 },
+    { property: 'valor_unit', label: 'Valor Unitário', filter: true, maxLength: 50 },
+  ];
+
+  constructor(
+    private despesasService: DespesasService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     console.log('Iniciando o componente app.component.ts');
-    this.despesasService.getAll().subscribe((data: any) => {
-      console.log(data);
-      this.items = data;
-    });
+    // this.loadDespesas();
   }
 
-  addDespesa() {
-    // this.poModal.open();
+  editDespesa(id: string) {
+    this.router.navigate([`/despesas/editar/${id}`]);
   }
 
-  closeModal() {
-    this.form.reset();
-    this.poModal.close();
-  }
-
-  restore() {
-    this.form.reset();
-  }
-
-  confirmDespesa() {
-    alert("TESTE");
+  deleteDespesa(id: string) {
+    this.despesasService.deleteData(id).subscribe(
+      (data) => {
+        console.log(data);
+        return true;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

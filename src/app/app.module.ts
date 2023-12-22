@@ -10,12 +10,15 @@ import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DespesasComponent } from './components/despesas/despesas.component';
 import { DespesaFormComponent } from './components/despesa-form/despesa-form.component';
+import { InterceptorModule } from './interceptors/interceptor.module';
+import { DespesaEditComponent } from './components/despesa-edit/despesa-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DespesasComponent,
-    DespesaFormComponent
+    DespesaFormComponent,
+    DespesaEditComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { DespesaFormComponent } from './components/despesa-form/despesa-form.com
     RouterModule.forRoot([]),
     PoTemplatesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InterceptorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
