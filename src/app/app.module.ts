@@ -12,13 +12,15 @@ import { DespesasComponent } from './components/despesas/despesas.component';
 import { DespesaFormComponent } from './components/despesa-form/despesa-form.component';
 import { InterceptorModule } from './interceptors/interceptor.module';
 import { DespesaEditComponent } from './components/despesa-edit/despesa-edit.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DespesasComponent,
     DespesaFormComponent,
-    DespesaEditComponent
+    DespesaEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

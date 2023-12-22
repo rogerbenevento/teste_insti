@@ -33,12 +33,12 @@ export class DespesasComponent {
     }),
   };
 
-  readonly fields = [
-    { property: 'cod_desp', label: 'Código', filter: true, maxLength: 50 },
-    { property: 'desc_desp', label: 'Descrição', filter: true, maxLength: 50 },
-    { property: 'Unidade', label: 'Unidade', filter: true, maxLength: 50 },
-    { property: 'tp_desp', label: 'Tipo de Despesa', filter: true, maxLength: 50 },
-    { property: 'valor_unit', label: 'Valor Unitário', filter: true, maxLength: 50 },
+  readonly fields: Array<any> = [
+    { property: 'cod_desp', label: 'Código', key: true, filter: true, sortable: true },
+    { property: 'desc_desp', label: 'Descrição', filter: true, sortable: true },
+    { property: 'Unidade', label: 'Unidade', filter: true, sortable: true },
+    { property: 'tp_desp', label: 'Tipo de Despesa', filter: true, sortable: true },
+    { property: 'valor_unit', label: 'Valor Unitário', filter: true, sortable: true },
   ];
 
   constructor(
